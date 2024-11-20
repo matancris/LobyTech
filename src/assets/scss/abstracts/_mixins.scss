@@ -1,0 +1,112 @@
+@use './variables' as *;
+@use './colors.module' as *;
+
+@mixin gap {
+  &.gap-sm {
+    gap: rem(8px);
+  }
+  &.gap-m {
+    gap: rem(16px);
+  }
+  &.gap-lg {
+    gap: rem(24px);
+  }
+  &.gap-xl {
+    gap: rem(32px);
+  }
+}
+
+@mixin modal {
+  position: fixed;
+
+  left: 50%;
+  top: 50%;
+
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 999px 999px rgba(0, 0, 0, 0.6);
+}
+
+@mixin customDirection($selector) {
+  body[dir='rtl'] {
+    #{$selector} {
+      @content;
+    }
+  }
+}
+
+@mixin thinScroll {
+  /* SCROLL */
+  // For Chrome, Safari and Opera
+  &::-webkit-scrollbar {
+    width: 12px; // Set the vertical scrollbar width
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 50px;
+    background: $border_gray;
+    border: 4px solid #fff;
+  }
+
+  // // For Firefox
+  scrollbar-color: $border_gray #fff;
+  scrollbar-width: thin;
+}
+
+/* Breakpoint mixins */
+
+@mixin for-mobile-layout {
+  @media (max-width: ($mobile-breakpoint + 40)) {
+      @content;
+  }
+}
+
+@mixin for-narrow-layout {
+  @media (min-width: ($mobile-breakpoint + 40)) {
+      @content;
+  }
+}
+
+@mixin for-normal-layout {
+  @media (min-width: ($narrow-breakpoint + 40)) {
+      @content;
+  }
+}
+
+@mixin for-wide-layout {
+  @media (min-width: ($normal-breakpoint + 40)) {
+      @content;
+  }
+}
+
+/* Media  Mixins */
+@mixin aspect-ratio($width, $height) {
+  position: relative;
+  overflow: hidden;
+  &::before {
+    display: block;
+    content: "";
+    width: 100%;
+    padding-top: ($height / $width) * 100%;
+  }
+  > * {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  > img {
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+// Mixin for removing hover effects on iphone screen
+@mixin hover-supported {    
+  @media not all and (pointer: coarse) {
+      &:hover {
+          @content;
+      }
+  }
+}

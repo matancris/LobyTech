@@ -1,0 +1,33 @@
+// System
+$gray: #a3a8b7;
+$gray-2: #858997;
+$light-gray-2: #e4e5e7;
+$light-gray-3: #A3A8B780;
+
+$light-gray: #f6f7f8;
+$white: #ffffff;
+
+// Primary
+$peach: #ff6464;
+$dark-blue: #031a28;
+
+// Accent
+$green: #3ebb95;
+$green-2: #b8d866;
+$blue: #66b8d8;
+$blue-2: #97aaf0;
+$purple: #c8a4ea;
+$purple-2: #C8A4EA;
+$pink: #ffb5dd;
+$pink-2: #ff7c9f;
+$pink-3: #e085c6;
+$yellow: #ffd217;
+$orange: #FF6464;
+$red: #FF003D;
+$purple-2: #7666D8;
+
+$hover-gray: $gray;
+
+:export {
+  hoverGray: $hover-gray;
+}

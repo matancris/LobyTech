@@ -1,0 +1,12 @@
+@use './variables' as *;
+
+// EM Functions
+@function em($pixels, $context: $main_font_size) {
+  @return calc($pixels/$context) * 1em;
+}
+
+// REM Functions
+@function rem($size) {
+  $remSize: calc($size / 16px);
+  @return ($remSize) * 1rem;
+}
