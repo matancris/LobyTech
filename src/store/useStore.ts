@@ -1,5 +1,4 @@
 import { create } from 'zustand';
-import { composeWithDevTools } from 'redux-devtools-extension'
 import { devtools } from 'zustand/middleware';
 
 // Define the state and actions for the store
