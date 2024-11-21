@@ -1,0 +1,7 @@
+@use "../../abstracts" as *;
+
+.app-header {
+    height: $header-height;
+    position: absolute;
+    width: 100%;
+}

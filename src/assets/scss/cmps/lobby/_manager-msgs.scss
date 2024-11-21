@@ -1,0 +1,42 @@
+@use "../../abstracts" as *;
+
+.manager-msgs-container {
+    overflow: hidden;
+    height: 100%;
+    position: relative;
+
+    h2 {
+        width: 100%;
+        background-color: azure;
+        z-index: 1;
+        position: absolute;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        box-shadow: $header-shadow;
+        padding: 0 rem(20px);
+        border-radius: 16px 16px 0 0;
+        
+    }
+
+    .manager-msgs-list {
+        padding: 0 rem(20px);
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        max-height: 100%;
+        gap: 3rem;
+        animation: scrollMessages 20s linear infinite;
+        position: absolute; /* Prevent stretching */
+    }
+}
+
+/* Keyframe animation for scrolling */
+@keyframes scrollMessages {
+    0% {
+        transform: translateY(100%);
+    }
+    100% {
+        transform: translateY(-200%);
+    }
+}

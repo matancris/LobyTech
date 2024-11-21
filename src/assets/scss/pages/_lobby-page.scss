@@ -1,0 +1,6 @@
+@use "../abstracts" as *;
+
+.lobby-page {
+    height: $vh;
+    padding-top: $header-height;
+}
