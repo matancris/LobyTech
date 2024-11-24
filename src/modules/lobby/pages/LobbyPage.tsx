@@ -21,7 +21,7 @@ export const LobbyPage = () => {
       <AppLayout layout="default">
         <LobbyAdList />
         <ManagerMsgsContainer managerMsgs={managerMsgs}/>
-        {/* <img src={LobbyImg} alt="" /> */}
+        <img src={LobbyImg} alt="" />
       </AppLayout>
     </section>
   )
