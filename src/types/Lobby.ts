@@ -1,5 +1,5 @@
 export interface ManagerMsg {
-    id: string;
+    id?: string;
     text: string;
     timestamp: Date;
 }

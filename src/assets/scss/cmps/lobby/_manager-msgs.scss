@@ -1,6 +1,8 @@
 @use "../../abstracts" as *;
 
 .manager-msgs-container {
+    $input-height: rem(50px); 
+
     overflow: hidden;
     height: 100%;
     position: relative;
@@ -10,13 +12,12 @@
         background-color: azure;
         z-index: 1;
         position: absolute;
-        height: 50px;
+        height: rem(50px);
         display: flex;
         align-items: center;
         box-shadow: $header-shadow;
         padding: 0 rem(20px);
         border-radius: 16px 16px 0 0;
-        
     }
 
     .manager-msgs-list {
@@ -28,6 +29,31 @@
         gap: 3rem;
         animation: scrollMessages 20s linear infinite;
         position: absolute; /* Prevent stretching */
+
+        &.static-list {
+            overflow: auto;
+            animation: none;
+            transform: translateY(0);
+            width: 100%;
+            padding: 2rem rem(20px);
+            padding-bottom: 2rem;
+            margin-top: $input-height;
+            height: calc(100% - $input-height*2);
+            gap: 2rem;
+        }
+    }
+
+    .edit-input-section {
+        width: 100%;
+        // height: 2rem;
+        display: flex;
+        align-items: center;
+        // background-color: aqua;
+        gap: 1rem;
+        position: absolute;
+        bottom: 0;
+        padding: rem(8px);
+        box-shadow: $header-shadow;
     }
 }
 

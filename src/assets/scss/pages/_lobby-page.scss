@@ -2,5 +2,48 @@
 
 .lobby-page {
     height: $vh;
-    padding-top: $header-height;
+    padding: 1rem;
+    max-height: $vh;
+
+    .media-component-container {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .upload-img-input-wrapper {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            background-color: $dark-blue-transparent;
+
+
+            &:hover {
+                opacity: 1;
+            }
+
+            input {
+                display: none;
+            }
+
+            label {
+                cursor: pointer;
+                background-color: azure;
+                padding: 1rem;
+                border-radius: 16px;
+            }
+        }
+        .uploaded-img-container {
+            background-size: cover; // Ensures the image covers the div
+            background-position: center; // Centers the image
+            width: 100%; // Adjust dimensions as needed
+            height: 100%; // Set the height explicitly
+        }
+    }
 }

@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { AppCard } from "./AppCard";
 
 type LayoutType = "default" | "grid" | "list";
 
@@ -17,10 +18,10 @@ export const AppLayout = ({ children, layout = "default" }: ReorderWrapperProps)
                 {children[0]}
             </div>
             <div className="right-section">
-                {children.slice(1).map((child) => (
-                    <div key={child?.toString()} className="item">
+                {children.slice(1).map((child, idx) => (
+                    <AppCard key={idx}>
                         {child}
-                    </div>
+                    </AppCard>
                 ))}
             </div>
         </div>)

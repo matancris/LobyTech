@@ -1,0 +1,15 @@
+@use "../../abstracts" as *;
+
+
+.app-card {
+    border-radius: 16px;
+    box-shadow: $card-shadow;
+    background-color: azure;
+    overflow: hidden;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
