@@ -9,5 +9,7 @@
 // CMPS
 @use './cmps/common/app-layout';
 @use './cmps/common/app-header';
+@use './cmps/common/app-card';
+@use './cmps/common/app-btn';
 @use './cmps/lobby/lobby-ad-list';
 @use './cmps/lobby/manager-msgs';

@@ -1,0 +1,7 @@
+{ 
+    "id": 1,
+    "name": "Admin",
+    "permissions": ["admin_access", "edit_users", "view_logs"],
+    "isActive": true,
+    "role": "master_admin"
+}

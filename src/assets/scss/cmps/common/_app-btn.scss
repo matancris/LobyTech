@@ -1,0 +1,63 @@
+@use "../../abstracts" as *;
+
+.app-btn {
+    width: fit-content;
+    min-width: rem(92px);
+    height: rem(42px);
+    background-color: $dark-blue;
+    border-radius: 8px;
+    font-size: rem(20px);
+    color: $white;
+    font-family: SecularOne;
+    font-weight: 400;
+
+    button {
+        width: 100%;
+        height: 100%;
+        padding: 0 1rem;
+    }
+
+    svg {
+        margin-inline-end: 0.5rem;
+        line-height: 21px;
+
+        path {
+            fill: $white;
+        }
+    }
+
+    &.primary-blue {
+        background-color: $dark-blue;
+    }
+
+    &.secondary {
+        background-color: $white;
+        border: 1px solid $gray;
+        color: $dark-blue;
+
+        path {
+            fill: $dark-blue;
+        }
+    }
+
+    &.disabled {
+        background-color: $light-gray-2;
+        border: unset;
+        color: $gray;
+
+        path {
+            fill: $gray;
+        }
+    }
+
+    &.full-width {
+        width: 100%;
+    }
+    &.extra-wide {
+        padding: 0 3rem;
+
+        button {
+            padding: unset;
+        }
+    }
+}
