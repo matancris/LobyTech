@@ -1,9 +1,9 @@
-import AdImg from "../../../assets/imgs/ad-placeholder.webp"
+import { MediaCmpContainer } from "./MediaCmpContainer"
 
 export const LobbyAdPreview = () => {
   return (
     <div>
-      <img src={AdImg} alt="" />
+      <MediaCmpContainer mediaType="video"  />
     </div>
   )
 }

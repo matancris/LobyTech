@@ -1,5 +1,7 @@
 import { ReactNode } from "react";
 import { AppCard } from "./AppCard";
+import { AppClock } from "./AppClock";
+import { AppWeather } from "./AppWeather";
 
 type LayoutType = "default" | "grid" | "list";
 
@@ -14,6 +16,10 @@ export const AppLayout = ({ children, layout = "default" }: ReorderWrapperProps)
 
     const DefaultLayout = () => {
         return (<div className={`layout-default ${layout === "grid" ? "grid-layout" : ""}`}>
+            <div className="top-section">
+                <AppClock />
+                <AppWeather />
+            </div>
             <div className="left-section">
                 {children[0]}
             </div>
