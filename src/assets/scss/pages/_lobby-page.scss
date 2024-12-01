@@ -9,7 +9,7 @@
         width: 100%;
         height: 100%;
 
-        .media-image-wrapper {
+        .media-image-wrapper, .media-video-wrapper {
             height: 100%;
             width: 100%;
             position: relative;
@@ -18,7 +18,7 @@
             justify-content: center;
         }
 
-        .upload-img-input-wrapper {
+        .upload-img-input-wrapper, .upload-video-input-wrapper {
             position: absolute;
             height: 100%;
             width: 100%;
@@ -44,11 +44,12 @@
                 border-radius: 16px;
             }
         }
-        .uploaded-img-container {
+        .uploaded-img-container, .uploaded-video-container {
             background-size: cover; // Ensures the image covers the div
             background-position: center; // Centers the image
             width: 100%; // Adjust dimensions as needed
             height: 100%; // Set the height explicitly
         }
+        
     }
 }
