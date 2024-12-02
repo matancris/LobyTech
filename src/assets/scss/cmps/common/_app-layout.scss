@@ -12,12 +12,6 @@
         height: 100%;
         gap: $gap;
 
-        .top-section {
-            grid-row: 1/1;
-            grid-column: 1/3;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-        }
 
         .left-section {
             background-color: rgb(41, 54, 54);
@@ -27,11 +21,33 @@
         }
 
         .right-section {
+            direction: rtl;
             display: grid;
             grid-row: 2 / 3;
             grid-template-columns: 1fr;
             grid-template-rows: 1fr 1fr;
             gap: $gap;
+        }
+
+        .bottom-section {
+            grid-column: 1/3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .news-flashes{
+                direction: rtl;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+
+                p {
+                    font-size: 18px;
+                    margin: 0;
+                }
+                
+            }
         }
     }
 }

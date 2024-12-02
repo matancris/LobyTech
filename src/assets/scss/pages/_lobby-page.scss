@@ -8,6 +8,7 @@
     .media-component-container {
         width: 100%;
         height: 100%;
+        position: relative;
 
         .media-image-wrapper, .media-video-wrapper {
             height: 100%;
@@ -18,7 +19,7 @@
             justify-content: center;
         }
 
-        .upload-img-input-wrapper, .upload-video-input-wrapper {
+        .upload-img-input-wrapper, .upload-video-input-wrapper, .media-choose-wrapper {
             position: absolute;
             height: 100%;
             width: 100%;
@@ -27,6 +28,7 @@
             justify-content: center;
             opacity: 0;
             background-color: $dark-blue-transparent;
+            z-index: 1;
 
 
             &:hover {
@@ -51,5 +53,32 @@
             height: 100%; // Set the height explicitly
         }
         
+    }
+
+    .app-dialog-content {
+
+        .dialog-main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .upload-input-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            input {
+                display: none;
+            }
+
+            label {
+                cursor: pointer;
+                background-color: $dark-blue-transparent;
+                padding: 1rem;
+                color: $white;
+                border-radius: 16px;
+            }
+        }
     }
 }
