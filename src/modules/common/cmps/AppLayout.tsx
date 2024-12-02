@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 import { AppCard } from "./AppCard";
 import { AppClock } from "./AppClock";
 import { AppWeather } from "./AppWeather";
+import { NewsFlashes } from "../../lobby/cmps/NewsFlashes";
 
 type LayoutType = "default" | "grid" | "list";
 
@@ -16,10 +17,10 @@ export const AppLayout = ({ children, layout = "default" }: ReorderWrapperProps)
 
     const DefaultLayout = () => {
         return (<div className={`layout-default ${layout === "grid" ? "grid-layout" : ""}`}>
-            <div className="top-section">
-                <AppClock />
-                <AppWeather />
-            </div>
+            {/* <div className="top-section"> */}
+            <AppClock />
+            <AppWeather />
+            {/* </div> */}
             <div className="left-section">
                 {children[0]}
             </div>
@@ -30,6 +31,10 @@ export const AppLayout = ({ children, layout = "default" }: ReorderWrapperProps)
                     </AppCard>
                 ))}
             </div>
+            <div className="bottom-section">
+                <NewsFlashes />
+            </div>
+
         </div>)
 
     }

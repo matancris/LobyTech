@@ -1,0 +1,24 @@
+@use "../../abstracts" as *;
+
+.app-round-button {
+    background-color: $white;
+    width: rem(40px);
+    height: rem(40px);
+    border-radius: 50%;
+    box-shadow: $card-shadow;
+    overflow: hidden;
+
+    &.disabled {
+        background-color: $light-gray-2;
+        border: unset;
+        color: $gray;
+
+        path {
+            fill: $gray;
+        }
+    }
+    @include for-mobile-layout {
+        width: rem(32px);
+        height: rem(32px);
+    }
+}
