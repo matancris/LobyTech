@@ -17,6 +17,21 @@ async function getMasterAdmin() {
     }
 };
 
+async function getCurrUser() {
+    // get admin from firebase db
+    try {
+        const snapshot = await get(usersRef);
+        if (snapshot.exists()) {
+            const users =  snapshot.val(); // Return the data as an object if you want to use it elsewhere in your application.
+            return users.find((user: any) => user.id === 2)
+        } else {
+            console.log('No data available');
+        }
+    } catch (error) {
+        console.error(error);
+    }
+};
+
 async function authenticateUser(email: string, password: string) {
     try {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
@@ -54,6 +69,7 @@ async function authenticateUser(email: string, password: string) {
 
 export const userService = {
     getMasterAdmin,
-    authenticateUser
+    authenticateUser,
+    getCurrUser
 }
 

@@ -6,16 +6,16 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: SecularOne;
+    font-family: NotoRegular, "Helvetica Neue", "Helvetica";
     font-weight: 400;
-    color: $dark-blue;
+    color: $white;
 }
 
 p, label {
     font-family: Rubik;
     font-weight: 300;
     font-size: 1rem;
-    color: $dark-blue;
+    color: $white;
 }
 
 span {

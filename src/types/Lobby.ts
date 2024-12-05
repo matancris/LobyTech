@@ -30,3 +30,12 @@ export type NewsRssResponse = {
     enclosure: Record<string, unknown>;
     categories: string[];
   }
+
+  export interface MediaState {
+    [key: string]: {
+        photoSrc: string | null;
+        videoSrc: string | null;
+        audioSrc: string | null;
+        currMediaType: "image" | "video" | "audio" | null;
+    };
+}

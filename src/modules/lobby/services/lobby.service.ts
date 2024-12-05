@@ -23,16 +23,13 @@ async function getManagerMsgs() {
 
     try {
         const snapshot = await get(managerMsgsRef);
-        console.log("🚀 ~ getManagerMsgs ~ snapshot:", snapshot)
         if (snapshot.exists()) {
             const managerMsgs = snapshot.val(); // Return the data as an object if you want to use it elsewhere in your application.
-            console.log("🚀 ~ getManagerMsgs ~ managerMsgs:", managerMsgs)
             return managerMsgs
         } else {
             console.log('No data available');
         }
     } catch (error) {
-        console.log("🚀 ~ getManagerMsgs ~ error:", error)
         console.error(error);
     }
 }
