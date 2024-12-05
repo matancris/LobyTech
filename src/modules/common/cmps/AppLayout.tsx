@@ -3,6 +3,9 @@ import { AppCard } from "./AppCard";
 import { AppClock } from "./AppClock";
 import { AppWeather } from "./AppWeather";
 import { NewsFlashes } from "../../lobby/cmps/NewsFlashes";
+import { AppLogo } from "./AppLogo";
+import { AppLocation } from "./AppLocation";
+
 
 type LayoutType = "default" | "grid" | "list";
 
@@ -18,13 +21,18 @@ export const AppLayout = ({ children, layout = "default" }: ReorderWrapperProps)
     const DefaultLayout = () => {
         return (<div className={`layout-default ${layout === "grid" ? "grid-layout" : ""}`}>
             {/* <div className="top-section"> */}
-            <AppClock />
+            <AppLogo />
             <AppWeather />
+            <AppLocation />
+            <AppClock />
+            <AppLogo />
+
+
             {/* </div> */}
-            <div className="left-section">
+            <div className="main-left-section">
                 {children[0]}
             </div>
-            <div className="right-section">
+            <div className="main-right-section">
                 {children.slice(1).map((child, idx) => (
                     <AppCard key={idx}>
                         {child}

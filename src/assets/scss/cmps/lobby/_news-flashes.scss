@@ -1,0 +1,32 @@
+.news-flashes {
+    direction: rtl;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 6rem;    
+    
+    .news-titles-container {
+        overflow: hidden; /* Prevent content from being visible outside the container */
+
+        .news-animation-wrapper {
+            display: flex;
+            gap: 10rem;
+            animation: slide-out 60s linear infinite; /* Animation applied here */
+            white-space: nowrap; /* Prevent wrapping of child elements */
+        }
+        
+        h1 {
+            text-wrap: nowrap;
+        }
+    }
+}
+
+/* Define the keyframes for the animation */
+@keyframes slide-out {
+    0% {
+        transform: translateX(1000%); // For 10 flashes every time - 100% translate
+    }
+    100% {
+        transform: translateX(-100%); /* Adjust the animation distance */
+    }
+}

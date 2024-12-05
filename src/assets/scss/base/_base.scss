@@ -1,7 +1,7 @@
 @use '../abstracts' as *;
 
 #App {
-  background-color: $light-gray;
+  background-color: $light-blue;
   min-height: $vh;
   padding: env(safe-area-inset-top, 20px) env(safe-area-inset-right, 1px) env(safe-area-inset-bottom, 10px) env(safe-area-inset-left, 1px);
 }

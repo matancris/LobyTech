@@ -15,7 +15,11 @@
 @use './cmps/common/app-weather';
 @use './cmps/common/app-dialog';
 @use './cmps/common/app-round-btn';
+@use './cmps/common/app-logo';
+@use './cmps/common/app-location';
+@use './cmps/common/media-cmp-container';
 
 
 @use './cmps/lobby/lobby-ad-list';
 @use './cmps/lobby/manager-msgs';
+@use './cmps/lobby/news-flashes';

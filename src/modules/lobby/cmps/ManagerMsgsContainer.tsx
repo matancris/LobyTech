@@ -1,5 +1,5 @@
 
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { useStore } from "../../../store/useStore"
 import { ManagerMsg } from "../../../types/Lobby"
 import { AppButton } from "../../common/cmps/AppButton"
@@ -11,13 +11,8 @@ interface Props {
 
 export const ManagerMsgsContainer = ({ managerMsgs }: Props) => {
   const [msgText, setMsgText] = useState('')
-  // get isEditMode from Zustand store
   const isEditMode = useStore((state) => state.isEditMode)
   const addManagerMsg = useStore((state) => state.addManagerMsg)
-
-  useEffect(() => {
-    console.log("🚀 ~ ManagerMsgsContainer ~ isEditMode:", managerMsgs)
-  }, [managerMsgs])
 
   const onSaveMsg = () => {
     addManagerMsg(msgText);

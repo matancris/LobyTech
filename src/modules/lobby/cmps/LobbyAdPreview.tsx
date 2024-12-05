@@ -2,8 +2,6 @@ import { MediaCmpContainer } from "./MediaCmpContainer"
 
 export const LobbyAdPreview = () => {
   return (
-    <div>
-      <MediaCmpContainer mediaType="video"  />
-    </div>
+    <MediaCmpContainer mediaType="video" id="lobby-ad-preview" />
   )
 }

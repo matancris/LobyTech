@@ -1,6 +1,5 @@
 import { useStore } from "../../../store/useStore";
 import { AppLayout } from "../../common/cmps/AppLayout";
-import { LobbyAdList } from "../cmps/LobbyAdList";
 import { useEffect } from "react";
 import { ManagerMsgsContainer } from "../cmps/ManagerMsgsContainer";
 import { MediaCmpContainer } from "../cmps/MediaCmpContainer";
@@ -16,10 +15,12 @@ export const LobbyPage = () => {
   return (
     <section className="lobby-page">
       <AppLayout layout="default">
-        <LobbyAdList />
+        {/* <LobbyAdList /> */}
+        <MediaCmpContainer mediaType="video" id="lobby-ad-preview" />
         <ManagerMsgsContainer managerMsgs={managerMsgs} />
-        <MediaCmpContainer mediaType="image"/>
+        <MediaCmpContainer mediaType="choose" id="main-page-preview" />
       </AppLayout>
+
     </section>
   );
 };

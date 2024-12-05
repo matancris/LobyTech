@@ -87,12 +87,14 @@ p.link-style {
 // Dividers
 
 span.vertical-line-divider {
-  border: 1px solid $light-gray-3;
+  border: 1px solid $white;
+  opacity: 0.6;
 }
 
 span.horizontal-line-divider {
   width: 100%;
   border: 1px solid $light-gray-3;
+  opacity: 0.6;
 }
 
 // Margin helpers

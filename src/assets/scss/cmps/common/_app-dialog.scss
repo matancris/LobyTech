@@ -1,4 +1,4 @@
-@use "../../abstracts" as *;
+@use "../../abstracts/" as *;
 
 .app-dialog {
     position: fixed;
@@ -6,7 +6,7 @@
     width: 100vw;
     height: $vh-full;
     background: #000000ad;
-    z-index: map-get($zindex, modal);
+    z-index: map-get($zindex, modal );
 
     .app-dialog-content {
         position: relative; // for background animations
