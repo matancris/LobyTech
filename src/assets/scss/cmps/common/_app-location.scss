@@ -7,6 +7,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 2rem;
-    font-family: NotoRegular;
+
+    h1 {
+        font-size: rem(70px);
+    }
+
+    h2 {
+        font-size: rem(50px);
+    }
 }
