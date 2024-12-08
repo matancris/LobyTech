@@ -19,16 +19,10 @@ export const NewsFlashes = () => {
         }
     }, []);
 
-    useEffect(() => {
-
-        console.log("🚀 ~ NewsFlashes ~ newsStrs:", newsStrs)
-
-    }, [newsStrs])
-
     return (
         <section className='news-flashes'>
             <div>
-                <img src={feedLogo} alt="Feed Logo" /> {/* Assuming the RSS feed has an "image" field with the logo URL */}
+                <img className='feed-logo' src={feedLogo} alt="Feed Logo" /> {/* Assuming the RSS feed has an "image" field with the logo URL */}
             </div>
             <div className="news-titles-container">
                 <div className="news-animation-wrapper">
