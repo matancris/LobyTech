@@ -34,7 +34,6 @@ export const NewsFlashes = () => {
                     ))}
                 </div>
             </div>
-            {/* <h1>{currFlash}</h1> */}
         </section>
     )
 }
