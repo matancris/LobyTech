@@ -13,7 +13,7 @@ interface Props {
 }
 
 // TODO: Fix the prefix problem
-export const AppButton = ({ text, PrefixIcon, isDisabled = false, type = 'primary-peach', isFullWidth, isExtraWide, onClick, isLoading }: Props) => {
+export const AppButton = ({ text, PrefixIcon, isDisabled = false, type = 'primary', isFullWidth, isExtraWide, onClick, isLoading }: Props) => {
     const btnClass = `${type} ${isDisabled ? 'disabled' : ''} ${isFullWidth ? 'full-width' : ''} ${isExtraWide ? 'extra-wide' : ''}`
 
     return (

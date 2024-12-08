@@ -2,12 +2,15 @@ import { useEffect, useState } from 'react';
 
 export const AppClock = () => {
   // get the current date in this format "DD-MM-YYYY"
-  const currentDate= new Date().toLocaleDateString();
-  const [ctime, setTime] = useState(new Date().toLocaleTimeString());
-
+  const currentDate = new Date().toLocaleDateString();
+  const [ctime, setTime] = useState(
+    new Date().toLocaleTimeString([], { hourCycle: 'h23' })
+  );
   useEffect(() => {
     const intervalId = setInterval(() => {
-      setTime(new Date().toLocaleTimeString());
+      setTime(
+        new Date().toLocaleTimeString([], { hourCycle: 'h23' })
+      )
     }, 1000); // Updates every second
 
     return () => clearInterval(intervalId); // Cleanup interval on unmount

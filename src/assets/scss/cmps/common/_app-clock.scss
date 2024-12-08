@@ -3,8 +3,16 @@
 .app-clock {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
     font-family: 'Courier New', Courier, monospace;
-    font-size: xx-large;
     font-weight: 800;
+
+
+    h1 {
+        font-size: rem(50px);
+    }
+
+    h2 {
+        font-size: rem(40px);
+    }
 }

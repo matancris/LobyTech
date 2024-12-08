@@ -45,12 +45,16 @@
             color: $dark-blue;
         }
     }
-    .uploaded-img-container,
-    .uploaded-video-container {
+    .uploaded-img-container {
         background-size: cover; // Ensures the image covers the div
         background-position: center; // Centers the image
         width: 100%; // Adjust dimensions as needed
         height: 100%; // Set the height explicitly
+    }
+    .uploaded-video-container {
+        width: 100%; // Adjust dimensions as needed
+        height: 100%; // Set the height explicitly
+        object-fit: cover;
     }
     .upload-audio-input-wrapper.header-audio {
         position: absolute;

@@ -6,19 +6,26 @@
     width: 100vw;
     height: $vh-full;
     background: #000000ad;
-    z-index: map-get($zindex, modal );
+    z-index: map-get($zindex, modal);
 
     .app-dialog-content {
         position: relative; // for background animations
         background-color: $light-gray;
         padding: rem(30px);
         border-radius: 20px;
+        color: $dark-blue;
 
         &:has(h1) {
             gap: rem(24px);
         }
 
+        p,
+        h1 {
+            color: $dark-blue;
+        }
+
         .close-dialog-btn {
+            color: $dark-blue;
             align-self: flex-end;
             z-index: 3; // for background animations
         }

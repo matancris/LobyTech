@@ -5,15 +5,16 @@ import { ManagerMsgsPreview } from "./ManagerMsgsPreview"
 interface Props {
     managerMsgs: ManagerMsg[];
     isEditMode: boolean // Array of messages from the manager
+    onRemoveMsg: (msg: ManagerMsg) => void; // Function to remove a message from the manager's list
 }
 
 
-export const ManagerMsgsList = ({ managerMsgs, isEditMode }: Props) => {
+export const ManagerMsgsList = ({ managerMsgs, isEditMode, onRemoveMsg }: Props) => {
     return (
         <section className={`manager-msgs-list ${isEditMode ? 'static-list' : ''}`}>
             {managerMsgs?.map((msg, idx) => (
                 <React.Fragment key={msg.id}>
-                    <ManagerMsgsPreview msg={msg} />
+                    <ManagerMsgsPreview msg={msg} isEditMode={isEditMode} onRemoveMsg={onRemoveMsg}/>
                     {idx + 1 !== managerMsgs.length && <span className="horizontal-line-divider"></span>}
                 </React.Fragment>
             ))}

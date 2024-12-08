@@ -15,6 +15,7 @@ interface AppState {
     isEditMode: boolean;
     getManagerMsgs: () => void;
     addManagerMsg: (msgText: string) => void;
+    removeManagerMsg: (msg: ManagerMsg) => void;
     getMasterAdmin: () => void;
     getCurrUser: () => void;
     authenticateUser: () => void;
@@ -71,6 +72,15 @@ export const useStore = create<AppState>()(
                 console.error("Failed to add message:", error);
             }
         },
+        removeManagerMsg: async (msg: ManagerMsg) => {
+            try {
+                const newMsgs = await lobbyService.modifyManagerMsgs("remove", msg);
+                set(() => ({ managerMsgs: newMsgs })); // Correct property name
+            } catch (error) {
+                console.error("Failed to add message:", error);
+            }
+        },
+
         // Auth
         authenticateUser: async () => {
             const manager = await userService.authenticateUser("loby.tech.pro@gmail.com", "LobyTech2024!")
