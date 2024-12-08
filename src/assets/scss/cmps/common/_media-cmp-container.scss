@@ -55,6 +55,8 @@
         width: 100%; // Adjust dimensions as needed
         height: 100%; // Set the height explicitly
         object-fit: cover;
+        position: absolute; // Ensure it stays within the parent
+        inset: 0;
     }
     .upload-audio-input-wrapper.header-audio {
         position: absolute;

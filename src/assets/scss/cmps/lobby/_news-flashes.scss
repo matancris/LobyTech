@@ -4,6 +4,10 @@
     align-items: center;
     width: 100%;
     gap: 6rem;    
+
+    .feed-logo {
+        border-radius: 28px 8px 8px 28px;
+    }
     
     .news-titles-container {
         overflow: hidden; /* Prevent content from being visible outside the container */
