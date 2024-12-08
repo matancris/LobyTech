@@ -7,30 +7,27 @@
         $gap: 1rem;
 
         display: grid;
-        grid-template-columns: 100px 1fr 2fr 1fr 100px;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
         grid-template-rows: 10% 1fr 10%;
         grid-template-areas:
-            "top       top         top         top       top"
-            "left    left      left      right   right"
-            "bottom  bottom    bottom    bottom  bottom";
+            "top     top       top       top  "
+            "left    left      left      right"
+            "bottom  bottom    bottom    bottom";
         height: 100%;
         gap: $gap;
 
         .top-section {
             grid-area: top; // Maps to the "top" grid area
-            background-color: rgb(31, 31, 31);
-            border-radius: 16px;
-            height: 10%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            display: grid;
+            grid-template-columns: 100px 1fr 2fr 1fr 100px;
+            grid-template-rows: 100%;
+            overflow: hidden;
         }
 
         .main-left-section {
             grid-area: left; // Maps to the "left" grid area
             background-color: rgb(41, 54, 54);
             border-radius: 16px;
-            height: 100%;
         }
 
         .main-right-section {

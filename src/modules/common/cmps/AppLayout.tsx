@@ -1,10 +1,7 @@
 import { ReactNode } from "react";
 import { AppCard } from "./AppCard";
-import { AppClock } from "./AppClock";
-import { AppWeather } from "./AppWeather";
-import { NewsFlashes } from "../../lobby/cmps/NewsFlashes";
 import { AppLogo } from "./AppLogo";
-import { AppLocation } from "./AppLocation";
+
 
 
 type LayoutType = "default" | "grid" | "list";
@@ -20,27 +17,27 @@ export const AppLayout = ({ children, layout = "default" }: ReorderWrapperProps)
 
     const DefaultLayout = () => {
         return (<div className={`layout-default ${layout === "grid" ? "grid-layout" : ""}`}>
-            {/* <div className="top-section"> */}
-            <AppLogo />
-            <AppWeather />
-            <AppLocation />
-            <AppClock />
-            <AppLogo />
-
-
-            {/* </div> */}
-            <div className="main-left-section">
+            <div className="top-section">
+                <AppLogo />
                 {children[0]}
+                {children[1]}
+                {children[2]}
+                {children[3]}
+            </div>
+
+
+            <div className="main-left-section">
+                {children[4]}
             </div>
             <div className="main-right-section">
-                {children.slice(1).map((child, idx) => (
+                {children.slice(5, children.length - 1).map((child, idx) => (
                     <AppCard key={idx}>
                         {child}
                     </AppCard>
                 ))}
             </div>
             <div className="bottom-section">
-                <NewsFlashes />
+                {children[children.length - 1]}
             </div>
 
         </div>)
