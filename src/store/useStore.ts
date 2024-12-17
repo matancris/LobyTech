@@ -18,6 +18,7 @@ interface AppState {
     addUserMsg: (msgText: string) => void;
     removeUserMsg: (msg: UserMsg) => void;
     getMasterAdmin: () => void;
+    getDataFromStorage: () => void;
     getCurrUser: () => void;
     authenticateUser: () => void;
     setEditMode: (isOn: boolean) => void;
@@ -45,6 +46,14 @@ export const useStore = create<AppState>()(
                     },
                 },
             })),
+        getDataFromStorage: async () => {
+            const loggedInUser = await userService.getLoggedInUser()
+            if (!loggedInUser) return;
+            set(() => ({
+                user: loggedInUser
+            }))
+            set(() => ({ managerMsgs: loggedInUser.userMsgs }))
+        },
         getManagerMsgs: async () => {
             try {
                 const managerMsgs: ManagerMsg[] = await lobbyService.getManagerMsgs();
@@ -110,8 +119,8 @@ export const useStore = create<AppState>()(
                 console.log("🚀 ~ login: ~ user:", user)
                 set(() => ({ user })); // Correct property name
                 set(() => ({ managerMsgs: user.userMsgs }))
-            } catch {
-
+            } catch (err) {
+                console.error(err)
             }
         },
         authenticateUser: async () => {
@@ -120,6 +129,7 @@ export const useStore = create<AppState>()(
             // // set(() => ({ isEditMode: true }));
         },
         logout: () => {
+            userService.logout();
             set(() => ({ user: null }))
             set(() => ({ isEditMode: false }));
             set(() => ({ managerMsgs: [] }))
