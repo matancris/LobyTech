@@ -101,8 +101,6 @@ export const useStore = create<AppState>()(
 
         // Auth
         login: async ({ email, password }: UserCredential) => {
-            console.log("🚀 ~ login: ~ password:", password)
-            console.log("🚀 ~ login: ~ email:", email)
             try {
                 // const user = await userService.authenticateUser("loby.tech.pro@gmail.com", "LobyTech2024!")
                 const authUser = await userService.authenticateUser(email, password)
@@ -124,6 +122,7 @@ export const useStore = create<AppState>()(
         logout: () => {
             set(() => ({ user: null }))
             set(() => ({ isEditMode: false }));
+            set(() => ({ managerMsgs: [] }))
         }
     }))
 );

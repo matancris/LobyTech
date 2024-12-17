@@ -51,7 +51,7 @@ const App = () => {
       {isLoginOpen &&
         <AppDialog onClose={() => setIsLoginOpen(false)}>
           <div className="login-dialog-content">
-            <form>
+            <form className='flex column gap-16 align-center'>
               <input type="email" placeholder="email" name="email" onChange={handleChange} />
               <input type="password" placeholder="password" name="password" id="" onChange={handleChange} />
               <AppButton text="Login" onClick={onLogin} />
