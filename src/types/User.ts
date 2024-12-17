@@ -5,4 +5,18 @@ export interface AppUser {
     role: string;
     address: string;
     city: string;
+    userMsgs: UserMsg[];
+    email: string;
+    authToken: string;
+}
+
+export interface UserMsg {
+    id?: string;
+    text: string;
+    timestamp: Date;
+}
+
+export interface UserCredential {
+    email: string;
+    password: string;
 }

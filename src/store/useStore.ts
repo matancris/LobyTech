@@ -3,8 +3,9 @@ import { devtools } from 'zustand/middleware';
 import { ManagerMsg, MediaState } from '../types/Lobby';
 import { lobbyService } from '../modules/lobby/services/lobby.service';
 import { userService } from '../modules/user/services/user.service';
-import { AppUser } from '../types/User';
+import { AppUser, UserCredential, UserMsg } from '../types/User';
 import { User } from 'firebase/auth';
+import { utilService } from '@/modules/common/services/util.service';
 
 // Define the state and actions for the store
 interface AppState {
@@ -14,18 +15,20 @@ interface AppState {
     manager: Partial<User> | null;
     isEditMode: boolean;
     getManagerMsgs: () => void;
-    addManagerMsg: (msgText: string) => void;
-    removeManagerMsg: (msg: ManagerMsg) => void;
+    addUserMsg: (msgText: string) => void;
+    removeUserMsg: (msg: UserMsg) => void;
     getMasterAdmin: () => void;
     getCurrUser: () => void;
     authenticateUser: () => void;
-    logout: () => void;  
+    setEditMode: (isOn: boolean) => void;
+    logout: () => void;
+    login: (userCred: UserCredential) => void;
     mediaState: MediaState;
     setMediaState: (id: string, state: Partial<MediaState[string]>) => void;
 }
 
 export const useStore = create<AppState>()(
-    devtools((set) => ({
+    devtools((set, get) => ({
         count: 0,
         managerMsgs: [],
         manager: null,
@@ -57,39 +60,70 @@ export const useStore = create<AppState>()(
         },
         getCurrUser: async () => {
             const user = await userService.getCurrUser()
-            set(() => ({ user })); 
+            set(() => ({ user }));
+            set(() => ({ managerMsgs: user.userMsgs }))
         },
         // ManagerMsgs
-        addManagerMsg: async (msgText) => {
+        addUserMsg: async (msgText) => {
             const msgToAdd = {
+                id: `msg_${utilService.makeId()}`,
                 text: msgText,
                 timestamp: new Date()
             }
+            // get user that in the store now
+            const user = get().user
+            if (!user) return;
+            user?.userMsgs?.push(msgToAdd)
             try {
-                const newMsgs = await lobbyService.modifyManagerMsgs("add", msgToAdd);
-                set(() => ({ managerMsgs: newMsgs })); // Correct property name
+                await userService.updateUser(user);
+                set(() => ({ user })); // Correct property name
+                set(() => ({ managerMsgs: user.userMsgs }))
             } catch (error) {
                 console.error("Failed to add message:", error);
             }
         },
-        removeManagerMsg: async (msg: ManagerMsg) => {
+        removeUserMsg: async (msg: UserMsg) => {
+            const user = get().user
+            if (!user) return;
+            user.userMsgs = user?.userMsgs?.filter((currMsg) => currMsg.id !== msg.id)
+
             try {
-                const newMsgs = await lobbyService.modifyManagerMsgs("remove", msg);
-                set(() => ({ managerMsgs: newMsgs })); // Correct property name
+                await userService.updateUser(user);
+                set(() => ({ user })); // Correct property name
+                set(() => ({ managerMsgs: user.userMsgs }))
             } catch (error) {
-                console.error("Failed to add message:", error);
+                console.error("Failed to remove message:", error);
             }
+        },
+        setEditMode: async (isOn: boolean) => {
+            set(() => ({ isEditMode: isOn }));
         },
 
         // Auth
+        login: async ({ email, password }: UserCredential) => {
+            console.log("🚀 ~ login: ~ password:", password)
+            console.log("🚀 ~ login: ~ email:", email)
+            try {
+                // const user = await userService.authenticateUser("loby.tech.pro@gmail.com", "LobyTech2024!")
+                const authUser = await userService.authenticateUser(email, password)
+                console.log("🚀 ~ login: ~ user:", authUser)
+                if (!authUser) throw new Error("Authentication failed");
+                const user = await userService.getUserByAuthId(authUser.uid)
+                console.log("🚀 ~ login: ~ user:", user)
+                set(() => ({ user })); // Correct property name
+                set(() => ({ managerMsgs: user.userMsgs }))
+            } catch {
+
+            }
+        },
         authenticateUser: async () => {
-            const manager = await userService.authenticateUser("loby.tech.pro@gmail.com", "LobyTech2024!")
-            set(() => ({ manager })); 
-            set(() => ({ isEditMode: true })); 
+            // const manager = await userService.authenticateUser("loby.tech.pro@gmail.com", "LobyTech2024!")
+            // // set(() => ({ manager }));
+            // // set(() => ({ isEditMode: true }));
         },
         logout: () => {
-            set(() => ({ manager: null }))
-            set(() => ({ isEditMode: false })); 
+            set(() => ({ user: null }))
+            set(() => ({ isEditMode: false }));
         }
     }))
 );
