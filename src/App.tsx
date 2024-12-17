@@ -7,7 +7,9 @@ import { AppButton } from './modules/common/cmps/AppButton';
 
 
 const App = () => {
+  const getDataFromStorage = useStore(state => state.getDataFromStorage)
   const user = useStore(state => state.user)
+  
   const [isLoginOpen, setIsLoginOpen] = useState(false)
   const [userCred, setUserCred] = useState({
     email: '',
@@ -18,7 +20,9 @@ const App = () => {
   const logout = useStore((state) => state.logout)
 
   useEffect(() => {
-    console.log("🚀 ~ useEffect ~ user:", user)
+    getDataFromStorage()
+  }, [])
+  useEffect(() => {
     if (!user) {
       setIsLoginOpen(true)
     } else {

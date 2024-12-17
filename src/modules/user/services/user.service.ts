@@ -1,5 +1,6 @@
 import { AppUser } from '@/types/User';
 import { firebase } from '../../../firebase/firebase'; // Assuming you've exported db from firebase.js
+import { storageService } from '@/modules/common/services/web-storage.service';
 const { ref, get, db, signInWithEmailAndPassword, auth, update } = firebase
 
 const usersRef = ref(db, 'users');
@@ -8,7 +9,7 @@ async function getMasterAdmin() {
     try {
         const snapshot = await get(usersRef);
         if (snapshot.exists()) {
-            const users =  snapshot.val(); // Return the data as an object if you want to use it elsewhere in your application.
+            const users = snapshot.val(); // Return the data as an object if you want to use it elsewhere in your application.
             return users.find((user: any) => user.id === 1)
         } else {
             console.log('No data available');
@@ -23,7 +24,7 @@ async function getCurrUser() {
     try {
         const snapshot = await get(usersRef);
         if (snapshot.exists()) {
-            const users =  snapshot.val(); // Return the data as an object if you want to use it elsewhere in your application.
+            const users = snapshot.val(); // Return the data as an object if you want to use it elsewhere in your application.
             return users.find((user: any) => user.id === 2)
         } else {
             console.log('No data available');
@@ -39,7 +40,7 @@ async function authenticateUser(email: string, password: string) {
         console.log("🚀 ~ authenticateUser ~ userCredential:", userCredential)
         // User successfully authenticated
         const user = userCredential.user;
-        
+
         // You can return user details or a custom response as needed
         return {
             uid: user.uid,
@@ -108,10 +109,15 @@ async function getUserByAuthId(authId: string) {
 
     // Reference to the specific user
     const userRef = ref(db, `users/${userKey}`);
-    const snapshot = await get(userRef);
-    return snapshot.val();
+    try {
+        const snapshot = await get(userRef);
+        storageService.save('loggedInUser', snapshot.val())
+        return snapshot.val();
+    } catch (err: any) {
+        console.error(`Error fetching user with authId ${authId}:`, err);
+        return null;
+    }
 
- 
 }
 
 
@@ -142,12 +148,28 @@ async function _findUserKeyBy(searchKey: string, fieldVal: string): Promise<stri
     }
 }
 
+async function getLoggedInUser() {
+    const loggedInUser = await storageService.load('loggedInUser') as AppUser;
+    if (!loggedInUser) {
+        return null;
+    } else {
+        return loggedInUser;
+    }
+}
+
+async function logout() {
+ await storageService.remove('loggedInUser');
+ return null; 
+}
+
 
 export const userService = {
     getMasterAdmin,
     authenticateUser,
     getCurrUser,
     getUserByAuthId,
-    updateUser
+    updateUser,
+    getLoggedInUser,
+    logout
 }
 
