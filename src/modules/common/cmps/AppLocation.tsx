@@ -1,17 +1,10 @@
 import { useStore } from "@/store/useStore"
-import { useEffect } from "react"
 import { AppRoundButton } from "./AppRoundButton";
 import addIcon from '@/assets/icons/add.svg?react'
 
 export const AppLocation = () => {
     //get user from the Zistand store
     const user = useStore(state => state.user)
-    const getCurrUser = useStore((state) => state.getCurrUser);
-    useEffect(() => {
-        if (!user) {
-            getCurrUser()
-        }
-    }, [])
     
     const onAddUserAddress = () => {
         // TODO: Implement adding user address logic

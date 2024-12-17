@@ -1,6 +1,5 @@
 import { useStore } from "../../../store/useStore";
 import { AppLayout } from "../../common/cmps/AppLayout";
-import { useEffect } from "react";
 import { ManagerMsgsContainer } from "../cmps/ManagerMsgsContainer";
 import { MediaCmpContainer } from "../cmps/MediaCmpContainer";
 import { AppWeather } from "@/modules/common/cmps/AppWeather";
@@ -11,11 +10,6 @@ import { NewsFlashes } from "../cmps/NewsFlashes";
 
 export const LobbyPage = () => {
   const managerMsgs = useStore((state) => state.managerMsgs);
-  const getManagerMsgs = useStore((state) => state.getManagerMsgs);
-
-  useEffect(() => {
-    getManagerMsgs(); // Fetch manager messages on mount
-  }, [getManagerMsgs]);
 
   return (
     <section className="lobby-page">
@@ -29,6 +23,7 @@ export const LobbyPage = () => {
         <MediaCmpContainer mediaType="choose" id="main-page-preview" />
         <NewsFlashes />
       </AppLayout>
-    </section>
+   
+    </section >
   );
 };

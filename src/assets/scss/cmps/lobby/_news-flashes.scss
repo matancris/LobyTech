@@ -28,9 +28,9 @@
 /* Define the keyframes for the animation */
 @keyframes slide-out {
     0% {
-        transform: translateX(1000%); // For 10 flashes every time - 100% translate
+        transform: translateX(-100%); // For 10 flashes every time - 100% translate
     }
     100% {
-        transform: translateX(-100%); /* Adjust the animation distance */
+        transform: translateX(1000%); /* Adjust the animation distance */
     }
 }

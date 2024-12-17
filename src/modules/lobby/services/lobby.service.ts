@@ -1,7 +1,7 @@
 
-import { ManagerMsg } from "../../../types/Lobby";
 import { firebase } from '../../../firebase/firebase'; // Assuming you've exported db from firebase.js
 import { utilService } from "../../common/services/util.service";
+import { UserMsg } from "@/types/User";
 const { ref, get, set, db } = firebase
 
 const managerMsgsRef = ref(db, 'managerMsgs');
@@ -37,11 +37,11 @@ async function getManagerMsgs() {
 
 // Update an existing manager messages
 // Function to handle add, remove, or update
-async function modifyManagerMsgs(action: "add" | "remove" | "update", msg: ManagerMsg) {
+async function modifyManagerMsgs(action: "add" | "remove" | "update", msg: UserMsg) {
     try {
         // Fetch current messages from the database
         const snapshot = await get(managerMsgsRef);
-        let messages: ManagerMsg[] = snapshot.exists() ? snapshot.val() : [];
+        let messages: UserMsg[] = snapshot.exists() ? snapshot.val() : [];
 
         if (!Array.isArray(messages)) {
             messages = [];

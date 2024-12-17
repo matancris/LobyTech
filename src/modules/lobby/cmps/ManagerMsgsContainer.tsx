@@ -1,22 +1,22 @@
 
 import { useState } from "react"
 import { useStore } from "../../../store/useStore"
-import { ManagerMsg } from "../../../types/Lobby"
 import { AppButton } from "../../common/cmps/AppButton"
 import { ManagerMsgsList } from "./ManagerMsgsList"
 import { AppDialog } from "@/modules/common/cmps/AppDialog"
+import { UserMsg } from "@/types/User"
 
 interface Props {
-  managerMsgs: ManagerMsg[]  // Array of messages from the manager
+  managerMsgs: UserMsg[]; // Array of messages from the manager
 }
 
 export const ManagerMsgsContainer = ({ managerMsgs }: Props) => {
   const [msgText, setMsgText] = useState('')
-  const [msgToRemove, setMsgToRemove] = useState<ManagerMsg | null>(null)
+  const [msgToRemove, setMsgToRemove] = useState<UserMsg | null>(null)
   const [isRemoveDialogOpen, setIsRemoveDialogOpen] = useState(false)
   const isEditMode = useStore((state) => state.isEditMode)
-  const addManagerMsg = useStore((state) => state.addManagerMsg)
-  const removeManagerMsg = useStore((state) => state.removeManagerMsg)
+  const addManagerMsg = useStore((state) => state.addUserMsg)
+  const removeManagerMsg = useStore((state) => state.removeUserMsg)
 
 
   const onSaveMsg = () => {
@@ -26,7 +26,7 @@ export const ManagerMsgsContainer = ({ managerMsgs }: Props) => {
     setMsgText('');
   }
 
-  const onRemoveMsg = (msg: ManagerMsg) => {
+  const onRemoveMsg = (msg: UserMsg) => {
     setIsRemoveDialogOpen(true)
     setMsgToRemove(msg)
   }
