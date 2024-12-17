@@ -113,10 +113,8 @@ export const useStore = create<AppState>()(
             try {
                 // const user = await userService.authenticateUser("loby.tech.pro@gmail.com", "LobyTech2024!")
                 const authUser = await userService.authenticateUser(email, password)
-                console.log("🚀 ~ login: ~ user:", authUser)
                 if (!authUser) throw new Error("Authentication failed");
                 const user = await userService.getUserByAuthId(authUser.uid)
-                console.log("🚀 ~ login: ~ user:", user)
                 set(() => ({ user })); // Correct property name
                 set(() => ({ managerMsgs: user.userMsgs }))
             } catch (err) {

@@ -8,7 +8,6 @@ interface Props {
     onRemoveMsg: (msg: ManagerMsg) => void; // Function to remove the message from the state array when the user clicks on the delete icon.
 }
 export const ManagerMsgsPreview = ({ msg, isEditMode, onRemoveMsg }: Props) => {
-    console.log("🚀 ~ ManagerMsgsPreview ~ msg:", msg)
     return (
         <section className="manager-msgs-preview">
             <p>{msg.text}</p>

@@ -33,7 +33,6 @@ const App = () => {
   const onLogin = (ev: any) => {
     ev.preventDefault()
     console.log('Login clicked')
-    console.log("🚀 ~ onLogin ~ userCred:", userCred)
     login(userCred)
   }
 

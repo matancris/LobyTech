@@ -37,7 +37,6 @@ async function getCurrUser() {
 async function authenticateUser(email: string, password: string) {
     try {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
-        console.log("🚀 ~ authenticateUser ~ userCredential:", userCredential)
         // User successfully authenticated
         const user = userCredential.user;
 
