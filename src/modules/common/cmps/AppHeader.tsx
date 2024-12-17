@@ -13,7 +13,6 @@ export const AppHeader = ({ onLogin, onLogout }: Props) => {
     const user = useStore(store => store.user)
     const isEditMode = useStore((state) => state.isEditMode);
     const setEditMode = useStore((state) => state.setEditMode);
-  
 
 
     return (
@@ -23,7 +22,12 @@ export const AppHeader = ({ onLogin, onLogout }: Props) => {
                 <MediaCmpContainer mediaType="audio" id="background-audio" isHeaderAudio />
                 <div className="actions-container flex gap-8">
                     <AppButton text={`${user ? 'Logout' : "Login"}`} type="secondary" onClick={user ? onLogout : onLogin} />
-                    <AppButton text={`${isEditMode ? 'Close edit' : "Edit"}`} type="secondary" onClick={isEditMode ? () => setEditMode(false) : () => setEditMode(true)} />
+                    {user &&
+                        <AppButton
+                            text={`${isEditMode ? 'Close edit' : "Edit"}`}
+                            type="secondary"
+                            onClick={isEditMode ? () => setEditMode(false) : () => setEditMode(true)} />
+                    }
                 </div>
             </div>
         </section>
