@@ -17,7 +17,7 @@ const storage = getStorage(app);
 const connectedRef = ref(db, ".info/connected");
 onValue(connectedRef, (snap) => {
     if (snap.val() === true) {
-        console.log("Connected to Firebase!");
+        console.log("Connected to Firebase!!");
     } else {
         console.log("Not connected to Firebase.");
     }
