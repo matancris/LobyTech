@@ -20,7 +20,7 @@ export const LobbyPage = () => {
         <AppLogo />
         <MediaCmpContainer mediaType="video" id="lobby-ad-preview" />
         <ManagerMsgsContainer managerMsgs={managerMsgs} />
-        <MediaCmpContainer mediaType="choose" id="main-page-preview" />
+        <MediaCmpContainer mediaType="image" id="main-page-preview" />
         <NewsFlashes />
       </AppLayout>
    
