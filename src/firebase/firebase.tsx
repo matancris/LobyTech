@@ -2,6 +2,7 @@
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, child, get, onValue, set, remove, update } from 'firebase/database';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getStorage, ref as storageRef, uploadBytes, getDownloadURL, listAll, deleteObject } from 'firebase/storage';
 
 import { config } from "../config"
 // TODO: Add SDKs for Firebase products that you want to use
@@ -37,6 +38,7 @@ onValue(connectedRef, (snap) => {
     }
 });
 
+const storage = getStorage(app);
 
 export const firebase = {
     ref,
@@ -47,5 +49,11 @@ export const firebase = {
     remove,
     update,
     auth,
-    signInWithEmailAndPassword
+    signInWithEmailAndPassword,
+    storage,
+    storageRef,
+    uploadBytes,
+    getDownloadURL,
+    listAll,
+    deleteObject
 }
