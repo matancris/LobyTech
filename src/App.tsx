@@ -20,6 +20,7 @@ const App = () => {
   const logout = useStore((state) => state.logout)
 
   useEffect(() => {
+    console.log('running on staging')
     getDataFromStorage()
   }, [])
   useEffect(() => {
