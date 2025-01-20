@@ -10,6 +10,7 @@ import { NewsFlashes } from "../../lobby/cmps/NewsFlashes";
 import { LayoutConfig, LayoutComponentType, LayoutSection } from "../../../types/Layout";
 import { layoutService } from "../services/layout.service";
 import { useStore } from "../../../store/useStore";
+import { CustomerLogo } from './CustomerLogo';
 
 interface Props {
     layoutId?: string;
@@ -24,7 +25,8 @@ const componentMap: Record<LayoutComponentType, React.FC<any>> = {
     MediaImage: (props) => <MediaCmpContainer mediaType="image" {...props} />,
     ManagerMsgs: ManagerMsgsContainer,
     NewsFlashes: NewsFlashes,
-    AppText: (props) => <h1 className="app-text">{props.text}</h1>
+    AppText: (props) => <h1 className="app-text">{props.text}</h1>,
+    CustomerLogo: CustomerLogo
 };
 
 export const AppLayout = ({ layoutId = 'default' }: Props) => {

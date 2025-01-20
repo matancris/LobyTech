@@ -7,7 +7,8 @@ export type LayoutComponentType =
   | 'MediaImage'
   | 'ManagerMsgs'
   | 'NewsFlashes'
-  | 'AppText';
+  | 'AppText'
+  | 'CustomerLogo';
 
 export interface LayoutSection {
   id: string;
