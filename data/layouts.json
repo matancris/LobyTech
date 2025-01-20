@@ -1,0 +1,108 @@
+[
+    {
+        "default": {
+            "id": "default",
+            "name": "Default Layout",
+            "type": "default",
+            "sections": {
+                "top": [
+                    {
+                        "id": "logo1",
+                        "component": "AppLogo"
+                    },
+                    {
+                        "id": "text1",
+                        "component": "AppText",
+                        "props": {
+                            "text": "ברוכים הבאים לסטודיו קוגומלו!"
+                        }
+                    },
+                    {
+                        "id": "logo2",
+                        "component": "AppLogo"
+                    }
+                ],
+                "left": [
+                    {
+                        "id": "video1",
+                        "component": "MediaVideo",
+                        "props": {
+                            "id": "lobby-ad-preview"
+                        }
+                    }
+                ],
+                "right": [
+                    {
+                        "id": "image1",
+                        "component": "MediaImage",
+                        "props": {
+                            "id": "main-page-preview"
+                        }
+                    }
+                ],
+                "bottom": [
+                    {
+                        "id": "clock1",
+                        "component": "AppClock"
+                    },
+                    {
+                        "id": "news1",
+                        "component": "NewsFlashes"
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "id": "customLayout1",
+        "name": "customLayout1 Layout",
+        "type": "custom-1",
+        "sections": {
+            "top": [
+                {
+                    "id": "logo1",
+                    "component": "AppLogo"
+                },
+                {
+                    "id": "text1",
+                    "component": "AppText",
+                    "props": {
+                        "text": "ברוכים הבאים לסטודיו קוגומלו!"
+                    }
+                },
+                {
+                    "id": "logo2",
+                    "component": "AppLogo"
+                }
+            ],
+            "left": [
+                {
+                    "id": "video1",
+                    "component": "MediaVideo",
+                    "props": {
+                        "id": "lobby-ad-preview"
+                    }
+                }
+            ],
+            "right": [
+                {
+                    "id": "image1",
+                    "component": "MediaImage",
+                    "props": {
+                        "id": "main-page-preview"
+                    }
+                }
+            ],
+            "bottom": [
+                {
+                    "id": "clock1",
+                    "component": "AppClock"
+                },
+                {
+                    "id": "news1",
+                    "component": "NewsFlashes"
+                }
+            ]
+        }
+    }
+]

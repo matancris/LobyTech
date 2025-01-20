@@ -8,6 +8,7 @@ export interface AppUser {
     userMsgs: UserMsg[];
     email: string;
     authToken: string;
+    selectedLayout?: string;
 }
 
 export interface UserMsg {
