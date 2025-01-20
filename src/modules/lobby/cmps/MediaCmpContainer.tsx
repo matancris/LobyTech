@@ -40,6 +40,13 @@ export const MediaCmpContainer = ({ mediaType, id, isHeaderAudio }: Props) => {
         setMediaState(id, { currMediaType: mediaType });
     }, [mediaType, id, setMediaState]);
 
+    // Add new useEffect to handle user changes
+    useEffect(() => {
+        if (user) {
+            console.log('User changed, reloading media for:', { mediaType, id });
+            loadExistingMedia();
+        }
+    }, [user?.name]); // Depend on user.name to reload when user changes
 
     const deleteExistingMedia = async (mediaType: string) => {
         try {
@@ -114,28 +121,29 @@ export const MediaCmpContainer = ({ mediaType, id, isHeaderAudio }: Props) => {
         );
     };
 
-    // Add a function to load existing media
+    // Update loadExistingMedia to clear existing media first
     const loadExistingMedia = async () => {
-        if (!currMediaType || !id || instanceState[mediaTypeToSrcKey[currMediaType]]) return;
+        if (!currMediaType || !id || !user?.name) return;
         
         try {
-            const mediaFolder = `${user?.name || 'unassigned'}/media/${currMediaType}s/${id}`;
+            // Clear existing media state first
+            setMediaState(id, { [`${mediaTypeToSrcKey[currMediaType]}`]: null });
+            
+            const mediaFolder = `${user.name}/media/${currMediaType}s/${id}`;
+            console.log('Loading media from:', mediaFolder);
+            
             const listRef = firebase.storageRef(firebase.storage, mediaFolder);
             const result = await firebase.listAll(listRef);
             
             if (result.items.length > 0) {
                 const downloadURL = await firebase.getDownloadURL(result.items[0]);
-                setMediaState(id, { [mediaTypeToSrcKey[currMediaType]]: downloadURL });
+                console.log('Found media for user:', { user: user.name, type: currMediaType });
+                setMediaState(id, { [`${mediaTypeToSrcKey[currMediaType]}`]: downloadURL });
             }
         } catch (error) {
             console.error("Error loading media:", error);
         }
     };
-
-    // Add this useEffect to load existing media when the component mounts
-    useEffect(() => {
-        loadExistingMedia();
-    }, [currMediaType, id]);
 
     return (
         <>
