@@ -1,0 +1,30 @@
+{
+    "MasterAdmin": {
+        "id": "master_admin_1",
+        "name": "MasterAdmin",
+        "authToken": "hqxA2uH1TWT4AIWHLoSEPSVRc253",
+        "role": "admin",
+        "address": "Tel Aviv",
+        "city": "Tel Aviv",
+        "email": "loby.tech.pro@gmail.com",
+        "selectedLayout": "default",
+        "userMsgs": [
+            {
+                "id": "msg_1",
+                "text": "Welcome to LobbyTech!",
+                "timestamp": "2024-01-20T10:00:00.000Z"
+            }
+        ]
+    },
+    "StudioCogumelo": {
+        "id": "studio_1",
+        "name": "StudioCogumelo",
+        "authToken": "vFlg4vFsAhTMG5NEgfXg7DamBYz2",
+        "role": "client",
+        "address": "Tel Aviv",
+        "city": "Tel Aviv",
+        "email": "user101@gmail.com",
+        "selectedLayout": "custom-1",
+        "userMsgs": []
+    }
+}
