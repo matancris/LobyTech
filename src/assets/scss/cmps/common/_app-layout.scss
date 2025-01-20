@@ -1,6 +1,7 @@
 @use "../../abstracts" as *;
 
 .app-layout {
+    max-width: 100vw;
     width: 100%;
     height: 100%;
     .layout-default {
@@ -40,10 +41,79 @@
         }
 
         .bottom-section {
-            grid-area: bottom; // Maps to the "bottom" grid area
+            grid-area: bottom;
             display: flex;
             justify-content: center;
             align-items: center;
+    
         }
     }
+
+    // Custom Layout
+    .layout-custom-1 {
+        $gap: 1rem;
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        grid-template-rows: 10% 1fr 10%;
+        grid-template-areas:
+            "top     top"
+            "left    right"
+            "bottom  bottom";
+        height: 100%;
+        gap: $gap;
+
+        .top-section {
+            grid-area: top;
+            display: grid;
+            grid-template-columns: 10% 1fr 10%;
+            grid-template-rows: 100%;
+            align-items: center;
+            justify-items: center;
+        }
+
+        .main-left-section {
+            grid-area: left;
+            background-color: rgb(41, 54, 54);
+            border-radius: 16px;
+        }
+
+        .main-right-section {
+            grid-area: right;
+            display: grid;
+            grid-template-rows: 1fr;
+            gap: $gap;
+        }
+
+        .bottom-section {
+            max-width: 100%;
+            grid-area: bottom;
+            display: flex;
+            gap: $gap;
+            overflow: hidden;
+            
+            .news-flashes {
+                flex: 1;
+                min-width: 0;
+                overflow: hidden;
+
+                .feed-logo {
+                    width: rem(70px);
+                }
+
+            }
+
+            .app-clock {
+
+                padding: 0 $gap;
+            }
+        }
+    }
+}
+
+.app-text {
+    direction: rtl;
+    font-size: 4rem;
+    font-weight: bold;
+    text-align: center;
+    color: white;
 }
