@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { AppCard } from "./AppCard";
 import { AppLogo } from "./AppLogo";
 import { AppWeather } from "./AppWeather";
