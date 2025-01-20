@@ -1,61 +1,64 @@
-[
-    {
-        "default": {
-            "id": "default",
-            "name": "Default Layout",
-            "type": "default",
-            "sections": {
-                "top": [
-                    {
-                        "id": "logo1",
-                        "component": "AppLogo"
-                    },
-                    {
-                        "id": "text1",
-                        "component": "AppText",
-                        "props": {
-                            "text": "ברוכים הבאים לסטודיו קוגומלו!"
-                        }
-                    },
-                    {
-                        "id": "logo2",
-                        "component": "AppLogo"
+{
+    "default": {
+        "id": "default",
+        "name": "Default Layout",
+        "type": "default",
+        "sections": {
+            "top": [
+                {
+                    "id": "logo1",
+                    "component": "AppLogo"
+                },
+                {
+                    "id": "weather1",
+                    "component": "AppWeather"
+                },
+                {
+                    "id": "location1",
+                    "component": "AppLocation"
+                },
+                {
+                    "id": "clock1",
+                    "component": "AppClock"
+                },
+                {
+                    "id": "logo2",
+                    "component": "AppLogo"
+                }
+            ],
+            "left": [
+                {
+                    "id": "video1",
+                    "component": "MediaVideo",
+                    "props": {
+                        "id": "lobby-ad-preview"
                     }
-                ],
-                "left": [
-                    {
-                        "id": "video1",
-                        "component": "MediaVideo",
-                        "props": {
-                            "id": "lobby-ad-preview"
-                        }
+                }
+            ],
+            "right": [
+                {
+                    "id": "msgs1",
+                    "component": "ManagerMsgs"
+                },
+                {
+                    "id": "image1",
+                    "component": "MediaImage",
+                    "props": {
+                        "id": "main-page-preview"
                     }
-                ],
-                "right": [
-                    {
-                        "id": "image1",
-                        "component": "MediaImage",
-                        "props": {
-                            "id": "main-page-preview"
-                        }
-                    }
-                ],
-                "bottom": [
-                    {
-                        "id": "clock1",
-                        "component": "AppClock"
-                    },
-                    {
-                        "id": "news1",
-                        "component": "NewsFlashes"
-                    }
-                ]
-            }
+                }
+            ],
+            "bottom": [
+                {
+                    "id": "news1",
+                    "component": "NewsFlashes"
+                }
+            ]
         }
     },
-    {
-        "id": "customLayout1",
-        "name": "customLayout1 Layout",
+    "custom-1": {
+        "id": "custom-1",
+        "name": "Studio Cogumelo Layout",
         "type": "custom-1",
         "sections": {
             "top": [
@@ -105,4 +108,4 @@
             ]
         }
     }
-]
+}
