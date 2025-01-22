@@ -5,7 +5,7 @@ import { LobbyPage } from './modules/lobby/pages/LobbyPage';
 import { useStore } from './store/useStore';
 import { AppButton } from './modules/common/cmps/AppButton';
 
-
+// new origin check
 const App = () => {
   const getDataFromStorage = useStore(state => state.getDataFromStorage)
   const user = useStore(state => state.user)
