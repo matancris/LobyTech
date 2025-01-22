@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 import { useStore } from "../../../store/useStore";
 import { AppButton } from "../../common/cmps/AppButton";
 import { AppDialog } from "../../common/cmps/AppDialog";
+import { UploadProgress } from "../../common/cmps/UploadProgress";
 import { firebase } from "../../../firebase/firebase";
+import { UploadTaskSnapshot, StorageError } from 'firebase/storage';
 
 interface Props {
     mediaType: "image" | "video" | "audio" | "choose";
@@ -31,6 +33,10 @@ export const MediaCmpContainer = ({ mediaType, id, isHeaderAudio }: Props) => {
     };
 
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [uploadProgress, setUploadProgress] = useState<number>(0);
+    const [isUploading, setIsUploading] = useState<boolean>(false);
+    const [uploadError, setUploadError] = useState<string | null>(null);
+    const [uploadTask, setUploadTask] = useState<any>(null);
 
     const { photoSrc, videoSrc, audioSrc, currMediaType } = instanceState;
 
@@ -48,6 +54,15 @@ export const MediaCmpContainer = ({ mediaType, id, isHeaderAudio }: Props) => {
         }
     }, [user?.name]); // Depend on user.name to reload when user changes
 
+    useEffect(() => {
+        if (uploadError) {
+            const timer = setTimeout(() => {
+                setUploadError(null);
+            }, 5000); // 5 seconds
+            return () => clearTimeout(timer);
+        }
+    }, [uploadError]);
+
     const deleteExistingMedia = async (mediaType: string) => {
         try {
             const mediaFolder = `${user?.name || 'unassigned'}/media/${mediaType}s/${id}`;
@@ -63,28 +78,68 @@ export const MediaCmpContainer = ({ mediaType, id, isHeaderAudio }: Props) => {
         }
     };
 
+    const cancelUpload = () => {
+        if (uploadTask) {
+            uploadTask.cancel();
+            setIsUploading(false);
+            setUploadProgress(0);
+            setUploadTask(null);
+        }
+    };
+
     const handleMediaUpload = async (
         event: React.ChangeEvent<HTMLInputElement>,
         mediaType: "image" | "video" | "audio",
     ) => {
         const file = event.target.files?.[0];
+        console.log('Starting upload for file:', { name: file?.name, size: file?.size, type: file?.type });
         if (!file) return;
 
+        setIsUploading(true);
+        setUploadProgress(0);
+        setUploadError(null);
+
         try {
-            // Delete old media first
             await deleteExistingMedia(mediaType);
 
             const storageReference = firebase.storageRef(
                 firebase.storage,
                 `${user?.name || 'unassigned'}/media/${mediaType}s/${id}/${file.name}`
             );
-
-            await firebase.uploadBytes(storageReference, file);
-            const downloadURL = await firebase.getDownloadURL(storageReference);
-            setMediaState(id, { [mediaTypeToSrcKey[mediaType]]: downloadURL });
-            setIsModalOpen(false);
-        } catch (error) {
+            
+            const task = firebase.uploadBytesResumable(storageReference, file);
+            setUploadTask(task);
+            
+            task.on('state_changed',
+                (snapshot: UploadTaskSnapshot) => {
+                    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    setUploadProgress(progress);
+                    console.log('Upload progress:', progress.toFixed(1) + '%');
+                },
+                (error: StorageError) => {
+                    console.error("Error during upload:", error);
+                    if (error.code === 'storage/canceled') {
+                        setUploadError('Upload canceled');
+                    } else {
+                        setUploadError(`Upload failed: ${error.message}`);
+                    }
+                    setIsUploading(false);
+                    setUploadTask(null);
+                },
+                async () => {
+                    const downloadURL = await firebase.getDownloadURL(storageReference);
+                    console.log('Upload complete. URL:', downloadURL);
+                    setMediaState(id, { [mediaTypeToSrcKey[mediaType]]: downloadURL });
+                    setIsModalOpen(false);
+                    setIsUploading(false);
+                    setUploadTask(null);
+                }
+            );
+        } catch (error: any) {
             console.error("Error uploading file:", error);
+            setUploadError(`Upload failed: ${error?.message || 'Unknown error'}`);
+            setIsUploading(false);
+            setUploadTask(null);
         }
     };
 
@@ -113,9 +168,10 @@ export const MediaCmpContainer = ({ mediaType, id, isHeaderAudio }: Props) => {
                     accept={accept}
                     onChange={(event) => handleMediaUpload(event, currMediaType)}
                     id={`${id}-${currMediaType}Upload`}
+                    disabled={isUploading}
                 />
                 <label htmlFor={`${id}-${currMediaType}Upload`}>
-                    Upload {currMediaType.charAt(0).toUpperCase() + currMediaType.slice(1)}
+                    {isUploading ? `Uploading... ${uploadProgress.toFixed(1)}%` : `Upload ${currMediaType.charAt(0).toUpperCase() + currMediaType.slice(1)}`}
                 </label>
             </div>
         );
@@ -154,6 +210,13 @@ export const MediaCmpContainer = ({ mediaType, id, isHeaderAudio }: Props) => {
                         <AppButton text="Choose Media" onClick={() => setIsModalOpen(true)} />
                     </div>
                 )}
+
+                <UploadProgress 
+                    progress={uploadProgress}
+                    isUploading={isUploading}
+                    onCancel={cancelUpload}
+                    error={uploadError}
+                />
 
                 {/* Render uploaded image */}
                 {currMediaType === "image" && (

@@ -2,7 +2,7 @@
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, child, get, onValue, set, remove, update } from 'firebase/database';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { getStorage, ref as storageRef, uploadBytes, getDownloadURL, listAll, deleteObject } from 'firebase/storage';
+import { getStorage, ref as storageRef, uploadBytes, getDownloadURL, listAll, deleteObject, uploadBytesResumable } from 'firebase/storage';
 
 import { config } from "../config"
 // TODO: Add SDKs for Firebase products that you want to use
@@ -38,5 +38,6 @@ export const firebase = {
     uploadBytes,
     getDownloadURL,
     listAll,
-    deleteObject
+    deleteObject,
+    uploadBytesResumable
 }
