@@ -59,6 +59,10 @@
         object-fit: cover;
         position: absolute; // Ensure it stays within the parent
         inset: 0;
+
+        @include for-wide-layout {
+            object-fit: unset;
+        }
     }
     .upload-audio-input-wrapper.header-audio {
         position: absolute;
