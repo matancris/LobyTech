@@ -7,6 +7,8 @@ export const LobbyPage = () => {
   const [layoutId, setLayoutId] = useState<string>('default');
 
   useEffect(() => {
+    console.log('staging...');
+    
     setLayoutId(user?.selectedLayout || 'default');
   }, [user]); // Watch for any user changes
   
