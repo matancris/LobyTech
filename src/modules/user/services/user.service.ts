@@ -1,6 +1,8 @@
 import { AppUser } from '@/types/User';
 import { firebase } from '../../../firebase/firebase'; // Assuming you've exported db from firebase.js
 import { storageService } from '@/modules/common/services/web-storage.service';
+import { MediaState } from '../../../types/Lobby';
+import { DEFAULT_MEDIA_STATE } from '../../../config/media.config';
 const { ref, get, db, signInWithEmailAndPassword, auth, update } = firebase
 
 const usersRef = ref(db, 'users');
@@ -150,17 +152,33 @@ async function _findUserKeyBy(searchKey: string, fieldVal: string): Promise<stri
 async function getLoggedInUser() {
     const loggedInUser = await storageService.load('loggedInUser') as AppUser;
     if (!loggedInUser) {
+        console.log('No logged in user found');
         return null;
-    } else {
-        return loggedInUser;
     }
+    
+    // Initialize media state if needed
+    const savedMediaState = await loadMediaState();
+    if (!savedMediaState) {
+        await saveMediaState(DEFAULT_MEDIA_STATE);
+    }
+
+    return loggedInUser;
+}
+
+async function saveMediaState(mediaState: MediaState) {
+    await storageService.save('mediaState', mediaState);
+}
+
+async function loadMediaState(): Promise<MediaState | undefined> {
+    const mediaState = await storageService.load<MediaState>('mediaState');
+    return mediaState;
 }
 
 async function logout() {
- await storageService.remove('loggedInUser');
- return null; 
+    await storageService.remove('loggedInUser');
+    await storageService.remove('mediaState');
+    return null;
 }
-
 
 export const userService = {
     getMasterAdmin,
@@ -169,6 +187,8 @@ export const userService = {
     getUserByAuthId,
     updateUser,
     getLoggedInUser,
-    logout
+    logout,
+    saveMediaState,
+    loadMediaState
 }
 

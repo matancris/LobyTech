@@ -7,10 +7,8 @@ export const LobbyPage = () => {
   const [layoutId, setLayoutId] = useState<string>('default');
 
   useEffect(() => {
-    if (user) {
-      setLayoutId(user.selectedLayout || 'default');
-    }
-  }, [user]);
+    setLayoutId(user?.selectedLayout || 'default');
+  }, [user]); // Watch for any user changes
   
   return (
     <section className="lobby-page">

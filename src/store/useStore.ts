@@ -5,7 +5,8 @@ import { lobbyService } from '../modules/lobby/services/lobby.service';
 import { userService } from '../modules/user/services/user.service';
 import { AppUser, UserCredential, UserMsg } from '../types/User';
 import { User } from 'firebase/auth';
-import { utilService } from '@/modules/common/services/util.service';
+import { utilService } from '../modules/common/services/util.service';
+import { DEFAULT_MEDIA_STATE } from '../config/media.config';
 
 // Define the state and actions for the store
 interface AppState {
@@ -37,23 +38,37 @@ export const useStore = create<AppState>()(
         isEditMode: false,
         mediaState: {},
         setMediaState: (id, state) =>
-            set((store) => ({
-                mediaState: {
+            set((store) => {
+                const newMediaState = {
                     ...store.mediaState,
                     [id]: {
                         ...store.mediaState[id],
                         ...state,
                     },
-                },
-            })),
+                } as MediaState;
+                
+                // Save media state through userService
+                userService.saveMediaState(newMediaState);
+                return { mediaState: newMediaState };
+            }),
+
         getDataFromStorage: async () => {
             const loggedInUser = await userService.getLoggedInUser()
-            if (!loggedInUser) return;
-            set(() => ({
-                user: loggedInUser
-            }))
-            set(() => ({ managerMsgs: loggedInUser.userMsgs }))
+            if (!loggedInUser) {
+                return;
+            }
+            
+            // Set user data
+            set((state) => ({
+                ...state,
+                user: loggedInUser,
+                managerMsgs: loggedInUser.userMsgs
+            }));
+            
+            // Handle media state
+            await initializeMediaState(loggedInUser, set);
         },
+
         getManagerMsgs: async () => {
             try {
                 const managerMsgs: ManagerMsg[] = await lobbyService.getManagerMsgs();
@@ -111,14 +126,23 @@ export const useStore = create<AppState>()(
         // Auth
         login: async ({ email, password }: UserCredential) => {
             try {
-                // const user = await userService.authenticateUser("loby.tech.pro@gmail.com", "LobyTech2024!")
                 const authUser = await userService.authenticateUser(email, password)
                 if (!authUser) throw new Error("Authentication failed");
+                
                 const user = await userService.getUserByAuthId(authUser.uid)
-                set(() => ({ user })); // Correct property name
-                set(() => ({ managerMsgs: user.userMsgs }))
+                if (!user) throw new Error("User data not found");
+
+                // Set user data
+                set((state) => ({
+                    ...state,
+                    user,
+                    managerMsgs: user.userMsgs
+                }));
+
+                // Handle media state
+                await initializeMediaState(user, set);
             } catch (err) {
-                console.error(err)
+                console.error('Login failed:', err)
             }
         },
         authenticateUser: async () => {
@@ -128,9 +152,26 @@ export const useStore = create<AppState>()(
         },
         logout: () => {
             userService.logout();
-            set(() => ({ user: null }))
-            set(() => ({ isEditMode: false }));
-            set(() => ({ managerMsgs: [] }))
+            // Clear all relevant state in one update
+            set((state) => ({ 
+                ...state,
+                user: null,
+                isEditMode: false,
+                managerMsgs: [],
+                mediaState: {},
+            }));
         }
     }))
 );
+
+// Helper function to initialize media state
+async function initializeMediaState(_user: AppUser, set: any) {
+    const savedMediaState = await userService.loadMediaState();
+    if (savedMediaState) {
+        set(() => ({ mediaState: savedMediaState }));
+        return;
+    }
+
+    set(() => ({ mediaState: DEFAULT_MEDIA_STATE }));
+    await userService.saveMediaState(DEFAULT_MEDIA_STATE);
+}

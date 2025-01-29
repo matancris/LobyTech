@@ -40,27 +40,31 @@ export const MediaCmpContainer = ({ mediaType, id, isHeaderAudio }: Props) => {
 
     const { photoSrc, videoSrc, audioSrc, currMediaType } = instanceState;
 
-
+    // Effect for initial media type setup and changes
     useEffect(() => {
         if (mediaType === "choose") return;
-        setMediaState(id, { currMediaType: mediaType });
-    }, [mediaType, id, setMediaState]);
-
-    // Add new useEffect to handle user changes
-    useEffect(() => {
-        if (user) {
-            console.log('User changed, reloading media for:', { mediaType, id });
-            loadExistingMedia();
+        
+        // Only set if different from current state to avoid unnecessary updates
+        if (instanceState.currMediaType !== mediaType) {
+            setMediaState(id, { currMediaType: mediaType });
         }
-    }, [user?.name]); // Depend on user.name to reload when user changes
+    }, [mediaType, id, setMediaState, instanceState.currMediaType]);
 
+    // Effect for loading media when user or media type changes
     useEffect(() => {
-        if (uploadError) {
-            const timer = setTimeout(() => {
-                setUploadError(null);
-            }, 5000); // 5 seconds
-            return () => clearTimeout(timer);
-        }
+        if (!user?.name || !currMediaType) return;
+        
+        loadExistingMedia();
+    }, [user?.name, currMediaType, id, mediaType]);
+
+    // Effect for error handling
+    useEffect(() => {
+        if (!uploadError) return;
+        
+        const timer = setTimeout(() => {
+            setUploadError(null);
+        }, 5000);
+        return () => clearTimeout(timer);
     }, [uploadError]);
 
     const deleteExistingMedia = async (mediaType: string) => {
