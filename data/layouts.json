@@ -70,7 +70,7 @@
                     "id": "text1",
                     "component": "AppText",
                     "props": {
-                        "text": "ברוכים הבאים לסטודיו קוגומלו!"
+                        "text": "ברוכים הבאים לסטודיו קוגומלו"
                     }
                 },
                 {
@@ -99,7 +99,10 @@
             "bottom": [
                 {
                     "id": "clock1",
-                    "component": "AppClock"
+                    "component": "AppClock",
+                    "props": {
+                        "showSeconds": false
+                    }
                 },
                 {
                     "id": "news1",
