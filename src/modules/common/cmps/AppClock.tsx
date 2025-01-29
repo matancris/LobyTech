@@ -1,20 +1,49 @@
 import { useEffect, useState } from 'react';
 
-export const AppClock = () => {
-  // get the current date in this format "DD-MM-YYYY"
-  const currentDate = new Date().toLocaleDateString();
-  const [ctime, setTime] = useState(
-    new Date().toLocaleTimeString([], { hourCycle: 'h23' })
+interface AppClockProps {
+  showSeconds?: boolean;
+}
+
+export const AppClock = ({ showSeconds = true }: AppClockProps) => {
+  const [currentDate, setCurrentDate] = useState(
+    new Date().toLocaleDateString('he-IL', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric'
+    })
   );
+  
+  const [ctime, setTime] = useState(
+    new Date().toLocaleTimeString([], { 
+      hourCycle: 'h23',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: showSeconds ? '2-digit' : undefined
+    })
+  );
+
   useEffect(() => {
     const intervalId = setInterval(() => {
+      const now = new Date();
+      setCurrentDate(
+        now.toLocaleDateString('he-IL', {
+          day: '2-digit',
+          month: '2-digit',
+          year: 'numeric'
+        })
+      );
       setTime(
-        new Date().toLocaleTimeString([], { hourCycle: 'h23' })
+        now.toLocaleTimeString([], { 
+          hourCycle: 'h23',
+          hour: '2-digit',
+          minute: '2-digit',
+          second: showSeconds ? '2-digit' : undefined
+        })
       )
-    }, 1000); // Updates every second
+    }, showSeconds ? 1000 : 60000); // Update every second if showing seconds, otherwise every minute
 
     return () => clearInterval(intervalId); // Cleanup interval on unmount
-  }, []);
+  }, [showSeconds]);
 
   return (
     <section className="app-clock flex column">
