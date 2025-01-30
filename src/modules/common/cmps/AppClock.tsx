@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react';
 
 interface AppClockProps {
   showSeconds?: boolean;
+  showDate?: boolean;
 }
 
-export const AppClock = ({ showSeconds = true }: AppClockProps) => {
+export const AppClock = ({ showSeconds = true, showDate = true }: AppClockProps) => {
   const [currentDate, setCurrentDate] = useState(
     new Date().toLocaleDateString('he-IL', {
       day: '2-digit',
@@ -47,7 +48,7 @@ export const AppClock = ({ showSeconds = true }: AppClockProps) => {
 
   return (
     <section className="app-clock flex column">
-      <div className="date"><h2>{currentDate}</h2></div>
+      {showDate && <div className="date"><h2>{currentDate}</h2></div>}
       <h1><time>{ctime}</time></h1>
     </section>
   );
