@@ -1,0 +1,19 @@
+{
+    "id": "custom-portrait-1",
+    "name": "Custom Portrait Layout 1",
+    "type": "custom-portrait-1",
+    "sections": {
+        "top": [
+            { "id": "clock1", "component": "AppClock", "props": { "withDate": false } },
+            { "id": "logo1", "component": "AppLogo" },
+            { "id": "weather1", "component": "AppWeather" }
+        ],
+        "left": [
+            { "id": "video1", "component": "MediaVideo", "props": { "id": "portrait-ad-preview" } }
+        ],
+        "right": [],
+        "bottom": [
+            { "id": "news1", "component": "NewsFlashes" }
+        ]
+    }
+}

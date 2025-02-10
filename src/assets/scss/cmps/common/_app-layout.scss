@@ -22,7 +22,6 @@
             display: grid;
             grid-template-columns: 100px 1fr 2fr 1fr 100px;
             grid-template-rows: 100%;
-
         }
 
         .main-left-section {
@@ -45,7 +44,6 @@
             display: flex;
             justify-content: center;
             align-items: center;
-    
         }
     }
 
@@ -90,7 +88,7 @@
             display: flex;
             gap: $gap;
             overflow: hidden;
-            
+
             .news-flashes {
                 flex: 1;
                 min-width: 0;
@@ -99,15 +97,65 @@
                 .feed-logo {
                     width: rem(70px);
                 }
-
             }
 
             .app-clock {
-
                 padding: 0 $gap;
             }
         }
     }
+
+    // Custom Portrait Layout
+    .layout-custom-portrait-1 {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: 10% 1fr 6%;
+        grid-template-areas:
+            "top"
+            "left"
+            "bottom";
+        gap: 1rem;
+        height: 100%;
+
+        .top-section {
+            grid-area: top;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            
+            p,
+            time {
+                font-size: 3.5rem;
+            }
+        }
+
+        .main-left-section {
+            grid-area: left;
+            background-color: rgb(41, 54, 54);
+            border-radius: 16px;
+            min-height: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .bottom-section {
+            grid-area: bottom;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+
+            .news-flashes {
+                padding: 0.5rem 0;
+            }
+        }
+    }
+
 
     .app-text {
         font-family: RubikSprayPaint, sans-serif;

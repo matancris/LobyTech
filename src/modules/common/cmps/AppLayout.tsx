@@ -99,22 +99,25 @@ export const AppLayout = ({ layoutId = 'default' }: Props) => {
     return (
         <section className='app-layout'>
             <div className={`layout-${layout.type}`}>
-                <div className="top-section">
+                {layout.sections.top && <div className="top-section">
                     {layout.sections.top.map(renderComponent)}
-                </div>
-                <div className="main-left-section">
+                </div>}
+                {layout.sections.left && <div className="main-left-section">
+
                     {layout.sections.left.map(renderComponent)}
-                </div>
-                <div className="main-right-section">
+                </div>}
+                {layout.sections.right && <div className="main-right-section">
+
                     {layout.sections.right.map((section) => (
                         <AppCard key={section.id}>
                             {renderComponent({ ...section, id: `card-${section.id}` })}
                         </AppCard>
                     ))}
-                </div>
-                <div className="bottom-section">
+                </div>}
+                {layout.sections.bottom && <div className="bottom-section">
                     {layout.sections.bottom.map(renderComponent)}
-                </div>
+                </div>}
+
             </div>
         </section>
     );

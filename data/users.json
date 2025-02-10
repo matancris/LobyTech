@@ -26,5 +26,16 @@
         "email": "user101@gmail.com",
         "selectedLayout": "custom-1",
         "userMsgs": []
+    },
+    "PortraitUser": {
+        "id": "portrait_user_1",
+        "name": "PortraitUser",
+        "authToken": "T98h9MgYJnNtXYeD1UXgbOxqwoT2",
+        "role": "client",
+        "address": "Tel Aviv",
+        "city": "Tel Aviv",
+        "email": "portraitUser1@gmail.com",
+        "selectedLayout": "custom-portrait-1",
+        "userMsgs": []
     }
 }
